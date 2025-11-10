@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>힌트 아코디언</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #111; /* 어두운 배경 */
+      color: #f5f5f5;         /* 밝은 글씨 */
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
+
+    .accordion {
+      border-bottom: 1px solid #333; /* 구분선 어둡게 */
+    }
+
+    .accordion button {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s ease;
+      color: #f5f5f5;
+    }
+
+    .accordion button:hover {
+      color: #9ad1ff; /* 마우스 오버 색상 */
+    }
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 8px;
+      color: #ccc; /* 어두운 배경에서 읽기 편하게 */
+    }
+
+    .panel.open {
+      padding: 8px 0 16px 8px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    /* ✅ 아코디언 안의 이미지 크기만 변경 */
+.accordion .panel img {
+  width: 50%;          /* 아코디언의 가로폭에 맞춰 자동 확장 */
+  max-width: none;      /* 기존의 최대폭 제한 해제 */
+  height: auto;         /* 비율 유지 */
+}
+
+  </style>
+</head>
+<body>
+  <img src="002.png" width="300">
+
+  <div class="accordion">
+    <button> 1단계 </button>
+    <div class="panel">
+      <p> '음매도장 사용 시 주의사항'을 보시면 아래 그림이 나타내는 단어가 '음양오행'임을 알 수 있습니다.<br>
+      <br> 
+      <img src="002-1.png" width="300"><br>
+      음양오행은 동양철학에서 우주의 만물을 설명하는 이론으로,<br> 
+      오행은 목(木), 화(火), 토(土), 금(金), 수(水)의 다섯 가지 기운을 뜻합니다.<br> 
+      <br> 
+      진행록을 보니 수(水)의 기운이 전무하네요.<br> 
+      <br>
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button> 2단계 </button>
+    <div class="panel">
+      <p> '음매도장 사용 시 주의사항'의 2번째 규칙을 보니, 음양오행에 '없는' 요소에 해당 도장을 찍으라고 되어 있습니다. <br>
+      <br>
+      박춘배는 수의 기운이 없으므로 아래 이미지의 도장을 찾아 찍어야합니다.<br> 
+      <br>
+      <img src="002-2.png" width="300"><br>
+      <br>
+      이제 박춘배가 어디서 일하는 지 알 수 있겠네요!</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button>정답</button>
+    <div class="panel">
+      <p> 음양오행, 구내식당 </p>
+    </div>
+  </div>
+
+
+  
+  <script>
+    const accordions = document.querySelectorAll('.accordion button');
+
+    accordions.forEach(button => {
+      button.addEventListener('click', () => {
+        const panel = button.nextElementSibling;
+        const isOpen = panel.classList.contains('open');
+
+        // 다른 패널 닫기
+        document.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('open');
+          p.style.maxHeight = null;
+        });
+
+        // 클릭한 패널 열기
+        if (!isOpen) {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

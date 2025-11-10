@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>힌트 아코디언</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #111; /* 어두운 배경 */
+      color: #f5f5f5;         /* 밝은 글씨 */
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
+
+    .accordion {
+      border-bottom: 1px solid #333; /* 구분선 어둡게 */
+    }
+
+    .accordion button {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s ease;
+      color: #f5f5f5;
+    }
+
+    .accordion button:hover {
+      color: #9ad1ff; /* 마우스 오버 색상 */
+    }
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 8px;
+      color: #ccc; /* 어두운 배경에서 읽기 편하게 */
+    }
+
+    .panel.open {
+      padding: 8px 0 16px 8px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    /* ✅ 아코디언 안의 이미지 크기만 변경 */
+.accordion .panel img {
+  width: 100%;          /* 아코디언의 가로폭에 맞춰 자동 확장 */
+  max-width: none;      /* 기존의 최대폭 제한 해제 */
+  height: auto;         /* 비율 유지 */
+}
+
+  </style>
+</head>
+<body>
+  <img src="003.png" width="300">
+
+  <div class="accordion">
+    <button> 1단계 </button>
+    <div class="panel">
+      <p> '주민센터 직원들의 쪽지'를 보니 쪽지를 붙이는 마스킹테이프의 일부분이 누락되어 있네요! <br>
+      <br>
+      진행록 테두리를 보시면 테이프의 나머지 부분을 발견하실 수 있습니다.<br> 
+      <br>
+      같은 디자인의 테이프를 맞추시면 체크모양의 주황색 화살표가 가리키는 단어를 순서대로 읽으시면됩니다.<br>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="accordion">
+    <button>정답</button>
+    <div class="panel">
+      <p> 토스트 </p>
+    </div>
+  </div>
+
+
+  
+  <script>
+    const accordions = document.querySelectorAll('.accordion button');
+
+    accordions.forEach(button => {
+      button.addEventListener('click', () => {
+        const panel = button.nextElementSibling;
+        const isOpen = panel.classList.contains('open');
+
+        // 다른 패널 닫기
+        document.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('open');
+          p.style.maxHeight = null;
+        });
+
+        // 클릭한 패널 열기
+        if (!isOpen) {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

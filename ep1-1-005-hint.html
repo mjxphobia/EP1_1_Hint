@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>힌트 아코디언</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #111; /* 어두운 배경 */
+      color: #f5f5f5;         /* 밝은 글씨 */
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
+
+    .accordion {
+      border-bottom: 1px solid #333; /* 구분선 어둡게 */
+    }
+
+    .accordion button {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s ease;
+      color: #f5f5f5;
+    }
+
+    .accordion button:hover {
+      color: #9ad1ff; /* 마우스 오버 색상 */
+    }
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 8px;
+      color: #ccc; /* 어두운 배경에서 읽기 편하게 */
+    }
+
+    .panel.open {
+      padding: 8px 0 16px 8px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    /* ✅ 아코디언 안의 이미지 크기만 변경 */
+.accordion .panel img {
+  width: 100%;          /* 아코디언의 가로폭에 맞춰 자동 확장 */
+  max-width: none;      /* 기존의 최대폭 제한 해제 */
+  height: auto;         /* 비율 유지 */
+}
+
+  </style>
+</head>
+<body>
+  <img src="005.png" width="300">
+
+  <div class="accordion">
+    <button> 떨어져 있는 무언가 발견하기 </button>
+    <div class="panel">
+      <p> 떨어져 있는 물건의 특징을 체크하는 문제입니다. <br>
+      <br>
+      먹을것이 아니고, 네모낳고, 뚜껑이 있고, 새거이고, 글자가 적혀있고, 저승복권판매점에서 파는것이 아니네요.<br> 
+      <br>
+      O,X를 체크하시고 빈칸의 테두리 색깔에 맞춰 해당하는 알파벳을 적으시면 됩니다.<br>
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button> O,X 체크 </button>
+    <div class="panel">
+      <p><img src="005-2.png" width="300"><br>
+      <br>
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button>정답</button>
+    <div class="panel">
+      <p> STAMPPAD </p>
+    </div>
+  </div>
+
+
+  
+  <script>
+    const accordions = document.querySelectorAll('.accordion button');
+
+    accordions.forEach(button => {
+      button.addEventListener('click', () => {
+        const panel = button.nextElementSibling;
+        const isOpen = panel.classList.contains('open');
+
+        // 다른 패널 닫기
+        document.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('open');
+          p.style.maxHeight = null;
+        });
+
+        // 클릭한 패널 열기
+        if (!isOpen) {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

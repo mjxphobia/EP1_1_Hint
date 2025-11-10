@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>힌트 아코디언</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #111; /* 어두운 배경 */
+      color: #f5f5f5;         /* 밝은 글씨 */
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
+
+    .accordion {
+      border-bottom: 1px solid #333; /* 구분선 어둡게 */
+    }
+
+    .accordion button {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.2s ease;
+      color: #f5f5f5;
+    }
+
+    .accordion button:hover {
+      color: #9ad1ff; /* 마우스 오버 색상 */
+    }
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 8px;
+      color: #ccc; /* 어두운 배경에서 읽기 편하게 */
+    }
+
+    .panel.open {
+      padding: 8px 0 16px 8px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    /* ✅ 아코디언 안의 이미지 크기만 변경 */
+.accordion .panel img {
+  width: 100%;          /* 아코디언의 가로폭에 맞춰 자동 확장 */
+  max-width: none;      /* 기존의 최대폭 제한 해제 */
+  height: auto;         /* 비율 유지 */
+}
+
+  </style>
+</head>
+<body>
+  <img src="004.png" width="300">
+
+
+  <div class="accordion">
+    <button> 단서 조합하기 </button>
+    <div class="panel">
+      <p> '박춘배의 음양오행'에서 얻은 단서와, '주민센터 직원들의 쪽지'에서 얻은 단서를 적으시면 됩니다. <br>
+      <br>
+      박춘배는 구내식당 업무에 매칭됐고, 직원들의 쪽지를 통해 토스트 담당인걸 유추할 수 있었네요!<br>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="accordion">
+    <button>정답</button>
+    <div class="panel">
+      <p> 구내식당, 토스트 </p>
+    </div>
+  </div>
+
+
+  
+  <script>
+    const accordions = document.querySelectorAll('.accordion button');
+
+    accordions.forEach(button => {
+      button.addEventListener('click', () => {
+        const panel = button.nextElementSibling;
+        const isOpen = panel.classList.contains('open');
+
+        // 다른 패널 닫기
+        document.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('open');
+          p.style.maxHeight = null;
+        });
+
+        // 클릭한 패널 열기
+        if (!isOpen) {
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
